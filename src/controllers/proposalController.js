@@ -56,19 +56,29 @@ async function handleFindUserProposals(req, res) {
     const formattedProposals = proposals.map((proposal) => ({
       id: proposal.id,
       message: proposal.message,
-      proposerId: proposal.proposerId,
+      proposer: proposal.proposer,
       targetItem: {
-        id: proposal.targetItem.id,
+        id: proposal.targetItemId,
         itemName: proposal.targetItem.item_name,
         imageUrl: proposal.targetItem.image_url,
+        condition: proposal.targetItem.condition.name,
+        user: {
+          name: proposal.targetItem.user.name,
+          city: proposal.targetItem.user.city,
+          state: proposal.targetItem.user.state,
+        },
       },
       offeredItems: (proposal.offeredItems || []).map((item) => ({
         id: item.item.id,
         itemName: item.item.item_name,
         imageUrl: item.item.image_url,
+        description: item.item.description,
+        condition: {
+          name: item.item.condition.name,
+        }
       })),
       status: proposal.status.status_name,
-      createdAt: proposal.createdAt,
+      createdAt: proposal.created_at,
     }));
 
     res.status(200).json({
@@ -107,24 +117,29 @@ async function handleReceivedUserProposals(req, res) {
     const formattedProposals = proposals.map((proposal) => ({
       id: proposal.id,
       message: proposal.message,
-      proposerId: proposal.proposerId,
-      proposerName: proposal.proposer?.name,
-      user: {
-        id: proposal.targetItem.user?.id,
-        name: proposal.targetItem.user?.name,
-      },
+      proposer: proposal.proposer,
       targetItem: {
-        id: proposal.targetItem.id,
+        id: proposal.targetItemId,
         itemName: proposal.targetItem.item_name,
         imageUrl: proposal.targetItem.image_url,
+        condition: proposal.targetItem.condition.name,
+        user: {
+          name: proposal.targetItem.user.name,
+          city: proposal.targetItem.user.city,
+          state: proposal.targetItem.user.state,
+        },
       },
       offeredItems: (proposal.offeredItems || []).map((item) => ({
         id: item.item.id,
         itemName: item.item.item_name,
         imageUrl: item.item.image_url,
+        description: item.item.description,
+        condition: {
+          name: item.item.condition.name,
+        }
       })),
       status: proposal.status.status_name,
-      createdAt: proposal.createdAt,
+      createdAt: proposal.created_at,
     }));
 
     res.status(200).json({

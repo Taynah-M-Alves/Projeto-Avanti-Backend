@@ -230,18 +230,21 @@ async function acceptProposal(proposalId, acceptingUserId) {
 
     const targetItem = await tx.items.findUnique({
       where: { id: proposal.targetItemId },
-      select: { item_name: true },
+      select: { item_name: true, user: { select: { name: true, email: true } } },
     });
 
     return { proposerData, targetItem, allItemsIdsToUpdate };
   });
+
+  console.log('Transaction Result:', transactionResult); 
 
   if (transactionResult) {
     await emailQueue.add("sendProposalAcceptedEmail", {
       userEmail: transactionResult.proposerData.email,
       proposalDetails: {
         itemName: transactionResult.targetItem.item_name,
-        itemOwnerName: transactionResult.proposerData.name,
+        itemOwnerName: transactionResult.targetItem.user.name,
+        itemOwnerEmail: transactionResult.targetItem.user.email,
       },
     });
   }

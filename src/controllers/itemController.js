@@ -122,8 +122,7 @@ async function handleGetAllItems(req, res) {
     if (where.AND.length === 0) {
       delete where.AND;
     }
-
-    console.log("Filtro: ", where);
+  
 
     const result = await itemService.findAllItems(where,  page, limit, orderByClause);
 

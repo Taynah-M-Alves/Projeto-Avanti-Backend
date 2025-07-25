@@ -25,8 +25,8 @@ proposalRouter.put(
   proposalController.handleUpdateProposal
 );
 
-proposalRouter.post("/:id/accept", proposalController.handleAcceptProposal);
+proposalRouter.post("/accept/:id", proposalController.handleAcceptProposal);
 
-proposalRouter.post("/:id/decline", proposalController.handleDeclineProposal);
+proposalRouter.post("/decline/:id", proposalController.handleDeclineProposal);
 
 module.exports = proposalRouter;

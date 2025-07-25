@@ -65,6 +65,9 @@ async function updateStatus(itemId, statusId, tx) {
 }
 
 async function findAllItems(where,  page = 1, limit = 10, orderBy) {
+
+  
+
   return await itemRepository.findAllItems(where, page, limit, orderBy);
 }
 

@@ -43,6 +43,8 @@ async function findUserProposals(userId, page = 1, limit = 10) {
                 id: true,
                 item_name: true,
                 image_url: true,
+                condition: true,
+                description: true,
               },
             },
           },
@@ -51,12 +53,34 @@ async function findUserProposals(userId, page = 1, limit = 10) {
           select: {
             id: true,
             item_name: true,
+            description: true,
             image_url: true,
+            condition: {
+              select: {
+                name: true,
+                slug: true,
+              },
+            },
+            user: {
+              select: {
+                name: true,
+                city: true,
+                state: true,
+              },
+            },
           },
         },
         status: {
           select: {
             status_name: true,
+          },
+        },
+        proposer: {
+          select: {
+            id: true,
+            name: true,
+            city: true,
+            state: true,
           },
         },
       },
@@ -100,12 +124,20 @@ async function findUserReceivedProposals(userId, page = 1, limit = 10) {
             id: true,
             item_name: true,
             image_url: true,
+            condition: {
+              select: {
+                name: true,
+              },
+            },
             user: {
               select: {
                 id: true,
                 name: true,
+                city: true,
+                state: true,
               },
             },
+
           },
         },
         offeredItems: {
@@ -115,6 +147,7 @@ async function findUserReceivedProposals(userId, page = 1, limit = 10) {
                 id: true,
                 item_name: true,
                 image_url: true,
+                condition: true,
               },
             },
           },

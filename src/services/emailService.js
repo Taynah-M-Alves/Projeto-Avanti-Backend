@@ -25,7 +25,7 @@ async function sendVerificationEmail(userEmail, verificationToken) {
 }
 
 async function sendPasswordResetEmail(userEmail, userName, resetToken) {
-  const resetUrl = `http://localhost:5173/reset-password?token=${resetToken}`;
+  const resetUrl = `http://localhost:5173/password/reset?token=${resetToken}`;
 
   const mailOptions = {
     from: `"App Name" <${process.env.EMAIL_USER}>`,
@@ -39,12 +39,22 @@ async function sendPasswordResetEmail(userEmail, userName, resetToken) {
 }
 
 async function sendAcceptedProposalEmail(userEmail, proposalDetails) {
+  console.log('Sending accepted proposal email:', proposalDetails);
   const mailOptions = {
     from: `"App Name" <${process.env.EMAIL_USER}>`,
     to: userEmail,
     subject: "Proposta Aceita",
-    html: `<p>Boas Notícias! Sua proposta para o item ${proposalDetails.itemName} foi aceita.
-    Entre em contato com ${proposalDetails.itemOwnerName} para combinar a troca</p>`,
+    html: `<div>
+    <p>Boas Notícias! Sua proposta para o item ${proposalDetails.itemName} foi aceita.
+    Entre em contato com ${proposalDetails.itemOwnerName} para combinar a troca</p>
+    
+        <p>Detalhes da Proposta: </p>
+        <ul>
+          <li>Item: ${proposalDetails.itemName}</li>
+          <li>Proprietário do Item: ${proposalDetails.itemOwnerName}</li>
+          <li>Email do Proprietário: ${proposalDetails.itemOwnerEmail}</li>
+        </ul>
+    </div>`,
   };
 
   await transporter.sendMail(mailOptions);
