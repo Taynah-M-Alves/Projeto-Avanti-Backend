@@ -14,7 +14,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@prisma/client": "^6.10.1",
+    "@prisma/client": "^6.12.0",
     "bad-words": "^3.0.4",
     "bcryptjs": "^3.0.2",
     "bullmq": "^5.56.0",
@@ -24,7 +24,6 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^7.0.4",
-    "prisma": "^6.10.1",
     "sequelize": "^6.37.7",
     "slugify": "^1.6.6",
     "zod": "^3.25.67"
@@ -36,6 +35,7 @@
     "dotenv": "^17.0.1",
     "jest": "^30.0.4",
     "nodemon": "^3.1.10",
+    "prisma": "^6.12.0",
     "supertest": "^7.1.1",
     "ts-jest": "^29.4.0",
     "ultracite": "5.0.32"
